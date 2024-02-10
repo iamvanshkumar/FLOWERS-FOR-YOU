@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowers for You</title>
+    <style>
+        html {
+            background: #1b1b1b;
+        }
+
+        h1, #question {
+            color: white;
+            text-align: center;
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .flower {
+            display: inline-block;
+            font-size: 24px;
+        }
+
+        #btnContainer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 5px;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateX(-10px);
+        }
+
+        .btn.no-hover {
+            transition: none;
+        }
+    </style>
+</head>
+<body>
+
+<center>
+    <h1>Flowers For You</h1>
+    <div id="question">Do you like me?</div>
+    <div id="btnContainer">
+        <button class="btn" onclick="handleYes()">Yes</button>
+        <button class="btn" id="noBtn" onmouseenter="handleNo()">No</button>
+    </div>
+</center>
+
+<script>
+    const maxFlowers = 100000; // Set a limit for the number of flowers
+    const delay = 5; // Delay in milliseconds
+
+    function printFlower(index) {
+        if (index < maxFlowers) {
+            const flowerSpan = document.createElement('span');
+            flowerSpan.className = 'flower';
+            flowerSpan.innerHTML = '🌹 ';
+            document.body.appendChild(flowerSpan);
+
+            setTimeout(function () {
+                printFlower(index + 1);
+            }, delay);
+        }
+    }
+
+    function handleYes() {
+        document.getElementById('noBtn').classList.add('hidden');
+        document.getElementById('question').innerHTML = 'Thank you for liking me!';
+        document.getElementById('btnContainer').classList.add('hidden');
+        printFlower(0);
+    }
+
+    function handleNo() {
+        const noBtn = document.getElementById('noBtn');
+        noBtn.style.position = 'absolute';
+        noBtn.style.left = Math.random() * (window.innerWidth - noBtn.offsetWidth) + 'px';
+        noBtn.style.top = Math.random() * (window.innerHeight - noBtn.offsetHeight) + 'px';
+        noBtn.classList.add('no-hover');
+    }
+</script>
+
+</body>
+</html>
